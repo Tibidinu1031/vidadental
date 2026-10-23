@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const $ = selector => document.querySelector(selector);
+  const icons = window.VIDA_ICONS;
   let api = '', token = '', appointments = [], closures = [];
   const labels = {pending: 'În așteptare', confirmed: 'Confirmată', cancelled: 'Anulată', expired: 'Expirată'};
   $('#api-url').value = window.VIDA_CONFIG.apiBase;
@@ -44,7 +45,7 @@
     });
     const container = $('#closures'); container.replaceChildren();
     closures.forEach(row => {
-      const chip = document.createElement('span'); chip.className = 'closure-chip'; chip.append(document.createTextNode(row.date)); const button = document.createElement('button'); button.textContent = '×'; button.setAttribute('aria-label', 'Deblochează ziua ' + row.date);
+      const chip = document.createElement('span'); chip.className = 'closure-chip'; chip.append(document.createTextNode(row.date)); const button = document.createElement('button'); button.append(icons.create('close')); button.setAttribute('aria-label', 'Deblochează ziua ' + row.date);
       button.addEventListener('click', async () => {try {await request('/admin/closures', 'DELETE', {date: row.date}); load();} catch (error) {message(error.message, true);}}); chip.append(button); container.append(chip);
     });
   }

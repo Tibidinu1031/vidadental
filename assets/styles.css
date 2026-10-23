@@ -99,6 +99,43 @@ img {
   max-width:100%
 }
 
+/* Interface icons are SVG geometry, never font glyphs or system emoji. */
+.icon-sprite {
+  position:absolute;
+  width:0;
+  height:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.icon {
+  display:inline-block;
+  width:1em;
+  height:1em;
+  flex:none;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vertical-align:-.13em;
+  overflow:visible;
+}
+
+.star-icons,.stars {
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  letter-spacing:0;
+  vertical-align:middle;
+}
+
+.note-icon,.small-flower,.service-toggle,.map-pin,.faq-list summary>span {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
 button {
   border:0
 }

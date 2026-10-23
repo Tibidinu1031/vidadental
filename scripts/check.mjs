@@ -3,6 +3,11 @@ import assert from 'node:assert/strict';
 const html = readFileSync('index.html', 'utf8');
 const files = ['index.html','admin.html',...readdirSync('assets').filter(name => /\.(js|css|json)$/.test(name)).map(name => 'assets/' + name)];
 for (const file of files) assert.ok(!/[\u2013\u2014]/.test(readFileSync(file, 'utf8')), 'Long dash found: ' + file);
+// A text glyph can switch to the device emoji font. UI icons must stay SVG.
+const systemIconGlyphs = /[\u2190-\u21ff\u2300-\u23ff\u2500-\u2bff\u{1f000}-\u{1faff}\ufe0e\ufe0f\u00d7]/u;
+for (const file of ['index.html','admin.html','assets/app.js','assets/admin.js','assets/styles.css']) {
+  assert.ok(!systemIconGlyphs.test(readFileSync(file, 'utf8')), 'Font-dependent interface icon found: ' + file);
+}
 for (const [, path] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
   if (!/^(https?:|mailto:|tel:)/.test(path)) assert.ok(existsSync(path), 'Missing file: ' + path);
 }
@@ -13,4 +18,4 @@ assert.equal(reviews.length, 10); assert.ok(reviews.every(row => row.rating === 
 assert.deepEqual(JSON.parse(readFileSync('assets/reviews-data.js', 'utf8').replace(/^window\.VIDA_REVIEWS\s*=\s*/, '').replace(/;\s*$/, '')), reviews);
 assert.ok(html.includes('Rating de 5/5 dupa 350+ review-uri in Google Maps'));
 assert.ok(html.includes('tel:+40745166956') && html.includes('tel:+40722581034'));
-console.log('Verified: assets, anchors, 10 sourced reviews, both phones and no long dashes.');
+console.log('Verified: assets, anchors, 10 sourced reviews, both phones, SVG interface icons and no long dashes.');

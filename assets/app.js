@@ -3,6 +3,7 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const config = window.VIDA_CONFIG;
+  const icons = window.VIDA_ICONS;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const api = config.apiBase.replace(/\/$/, '');
   const months = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
@@ -53,7 +54,7 @@
     (window.VIDA_REVIEWS || []).forEach((review, index) => {
       const card = document.createElement('article'); card.className = 'review-card';
       const top = document.createElement('div'); top.className = 'review-card-top';
-      const stars = document.createElement('span'); stars.className = 'stars'; stars.textContent = '★★★★★'; stars.setAttribute('aria-label', '5 din 5 stele');
+      const stars = document.createElement('span'); stars.className = 'stars'; stars.append(icons.stars()); stars.setAttribute('role', 'img'); stars.setAttribute('aria-label', '5 din 5 stele');
       const google = document.createElement('span'); google.className = 'google-g'; google.textContent = 'G'; google.setAttribute('aria-hidden', 'true'); top.append(stars, google);
       const quote = document.createElement('blockquote'); quote.textContent = '„' + review.text + (/[.!?]$/.test(review.text) ? '' : '…') + '”';
       if (['Adriana C Georgescu', 'Lucian Manolache'].includes(review.name)) quote.lang = 'en';
@@ -61,7 +62,7 @@
       const img = document.createElement('img'); img.src = review.image; img.width = 39; img.height = 39; img.loading = 'lazy'; img.alt = 'Fotografia publică de profil a lui ' + review.name;
       const info = document.createElement('div'); const name = document.createElement('strong'); name.textContent = review.name;
       const source = document.createElement('small'); source.textContent = 'Recenzie Google · 5/5'; info.append(name, source);
-      const link = document.createElement('a'); link.href = config.mapsUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = '↗'; link.setAttribute('aria-label', 'Citește recenziile Vidadental pe Google Maps, inclusiv recenzia de la ' + review.name);
+      const link = document.createElement('a'); link.href = config.mapsUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.append(icons.create('arrow-up-right')); link.setAttribute('aria-label', 'Citește recenziile Vidadental pe Google Maps, inclusiv recenzia de la ' + review.name);
       author.append(img, info, link); card.append(top, quote, author); card.dataset.index = index; track.append(card);
     });
     const width = () => track.firstElementChild.getBoundingClientRect().width + parseFloat(getComputedStyle(track).gap);
@@ -132,10 +133,15 @@
   }
   $('#to-details').addEventListener('click', () => {if (selectedDate && selectedTime) showStep(2);});
   $$('[data-back]').forEach(button => button.addEventListener('click', () => showStep(Number(button.dataset.back))));
+  function setSubmitLabel(label) {
+    const arrow = document.createElement('span');
+    arrow.append(icons.create('arrow-up-right'));
+    $('#submit-booking').replaceChildren(document.createTextNode(label + ' '), arrow);
+  }
   if (!api) {
     $('#reminder-choice').hidden = true; form.elements.email.required = false;
     const emailLabel = form.elements.email.parentElement; emailLabel.firstChild.textContent = 'Adresa de e-mail (opțional)';
-    $('#submit-booking').replaceChildren(document.createTextNode('Deschide WhatsApp '), Object.assign(document.createElement('span'), {textContent: '↗'}));
+    setSubmitLabel('Deschide WhatsApp');
     $('#submit-note').textContent = 'Vei continua în WhatsApp cu un mesaj pregătit. Verifică-l și trimite-l pentru a solicita programarea. Clinica îți confirmă apoi data și ora.';
   } else {
     $('#availability-note').textContent = 'Orele se verifică în calendarul clinicii. Cererea devine programare după confirmare. Ora locală: România.';
@@ -175,7 +181,7 @@
       form.hidden = true; $('#booking-success').hidden = false; $('#success-reference').textContent = 'Referința cererii: ' + body.id;
       $('#booking-success h3').tabIndex = -1; $('#booking-success h3').focus();
     } catch (error) {$('#submit-error').textContent = error.name === 'TimeoutError' ? 'Răspunsul întârzie. Poți reîncerca în siguranță, folosind aceeași cerere.' : 'Nu am putut trimite cererea. Verifică conexiunea sau sună la 0745 166 956.';}
-    finally {button.disabled = false; button.textContent = 'Trimite cererea ↗';}
+    finally {button.disabled = false; setSubmitLabel('Trimite cererea');}
   });
   $('#book-again').addEventListener('click', () => {form.reset(); form.hidden = false; $('#booking-success').hidden = true; selectedDate = ''; selectedTime = ''; requestId = crypto.randomUUID(); $('#time-slots').replaceChildren(); $('#time-label').textContent = 'Alege mai întâi o zi'; $('#to-details').disabled = true; renderCalendar(); showStep(1);});
   $('#load-map').addEventListener('click', () => {
