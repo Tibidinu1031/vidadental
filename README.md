@@ -5,7 +5,7 @@ Site în română, realizat în HTML, CSS și JavaScript, cu `index.html` în r�
 ## Ce este gata
 
 - Design responsive, animații la scroll, meniu mobil, servicii extensibile, carusel și interacțiuni cu tastatura.
-- Contururi curbe simetrice în fundal și accente controlate de salvie și teracotă.
+- Unde simetrice pe întregul fundal, într-un singur strat continuu, cu accente controlate de salvie și teracotă.
 - Hero dimensionat după înălțimea ecranului, inclusiv pe mobil, pentru a afișa din prima titlul, acțiunile și imaginea.
 - 10 fragmente din recenzii Google de 5/5, cu fotografiile publice originale de profil și link către Google Maps.
 - Textul solicitat: „Rating de 5/5 dupa 350+ review-uri in Google Maps”. Profilul Google afișa 360 de recenzii și 5/5 la verificarea din 23 octombrie 2026.

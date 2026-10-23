@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="none" fill="none">
+  <defs>
+    <path id="wave" d="M-160 40C80 40 80-90 320-90C560-90 560 90 800 90C1040 90 1040-90 1280-90C1520-90 1520 40 1760 40" vector-effect="non-scaling-stroke"/>
+    <pattern id="flow" width="1600" height="1000" patternUnits="userSpaceOnUse">
+      <g stroke="#8ea58e" stroke-width="1">
+        <use href="#wave" transform="translate(0 -100)"/>
+        <use href="#wave" transform="translate(0 -50)"/>
+        <use href="#wave"/>
+        <use href="#wave" transform="translate(0 50)"/>
+        <use href="#wave" transform="translate(0 100)"/>
+        <use href="#wave" transform="translate(0 150)"/>
+        <use href="#wave" transform="translate(0 200)"/>
+        <use href="#wave" transform="translate(0 250)"/>
+        <use href="#wave" transform="translate(0 300)"/>
+        <use href="#wave" transform="translate(0 350)"/>
+        <use href="#wave" transform="translate(0 400)"/>
+        <use href="#wave" transform="translate(0 450)"/>
+        <use href="#wave" transform="translate(0 500)"/>
+        <use href="#wave" transform="translate(0 550)"/>
+        <use href="#wave" transform="translate(0 600)"/>
+        <use href="#wave" transform="translate(0 650)"/>
+        <use href="#wave" transform="translate(0 700)"/>
+        <use href="#wave" transform="translate(0 750)"/>
+        <use href="#wave" transform="translate(0 800)"/>
+        <use href="#wave" transform="translate(0 850)"/>
+        <use href="#wave" transform="translate(0 900)"/>
+        <use href="#wave" transform="translate(0 950)"/>
+        <use href="#wave" transform="translate(0 1000)"/>
+        <use href="#wave" transform="translate(0 1050)"/>
+        <use href="#wave" transform="translate(0 1100)"/>
+      </g>
+    </pattern>
+  </defs>
+  <path fill="url(#flow)" d="M0 0h1600v1000H0z"/>
+</svg>
