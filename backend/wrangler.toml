@@ -1,0 +1,23 @@
+name = "vidadental-programari"
+main = "worker.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+# Replace with the exact GitHub Pages origin, without a path or trailing slash.
+ALLOWED_ORIGINS = "https://YOUR-USERNAME.github.io"
+MAIL_FROM = "Vidadental <programari@YOUR-VERIFIED-DOMAIN.ro>"
+CLINIC_EMAIL = "contact@vidadental.ro"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "vidadental-programari"
+database_id = "REPLACE-WITH-D1-DATABASE-ID"
+
+# Secrets, set with wrangler secret put, never committed:
+# ADMIN_TOKEN: a random secret with at least 32 characters
+# RESEND_API_KEY: an API key for a verified sending domain
+# RATE_SALT: a random secret for hashing the per-hour abuse prevention bucket

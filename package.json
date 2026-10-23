@@ -1,0 +1,12 @@
+{
+  "name": "vidadental",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vidadental website, with a root index.html for GitHub Pages",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs && node --check assets/app.js && node --check assets/admin.js && node --check backend/worker.mjs && node --test tests/booking.test.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {"node": ">=22.13.0"}
+}
